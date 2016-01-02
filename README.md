@@ -1,2 +1,0 @@
-# docker
-# javascript.jquery.
