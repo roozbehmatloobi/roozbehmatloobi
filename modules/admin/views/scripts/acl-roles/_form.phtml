@@ -1,0 +1,65 @@
+<!-- start acl role form -->
+<form name="aclroles" method="post" action="" class="form">
+	
+	<div style="width:970px">
+		<div class="content-box">
+			<div class="content-box-header">Role Details</div>
+			<div class="content-box-body">
+				<label>Name:</label>
+				<?php echo $this->formText('name', $this->data['name']); ?>
+				<?php echo $this->errorMsg('name'); ?>
+				<br class="clear" />
+				
+				<label>Description:</label>
+				<?php echo $this->formTextarea('description', $this->data['description'], array('rows' => '6')); ?>
+				<?php echo $this->errorMsg('description'); ?>
+				<br class="clear" />
+			</div>
+		</div>
+		
+		<?php foreach($this->aclresources as $module): ?>
+		<div class="content-box">
+			<div class="content-box-header"><?php echo $module['name']; ?></div>
+			<div class="content-box-body">
+				<?php $count = 0; ?>
+				<?php foreach ($module['controllers'] as $controller): ?>
+					<div style="float: left; width:190px; padding:10px 20px;">
+						<b><?php echo $controller['name']; ?></b>
+						<hr style=" color: #fff; border: 0; background-color: #ccc; height: 1px;" />
+						<br />
+						<?php foreach ($controller['actions']  as $action): ?>
+							<?php
+								$checkboxName    = 'resource::'.$module['name'].'::'.$controller['name'].'::'.$action['name'];
+								$fieldData       = isset($this->data[$checkboxName]) ? $this->data[$checkboxName] : '';
+								$checkboxOptions = array('checked' => false);
+								
+								if ($fieldData == 1) {
+									$checkboxOptions['checked'] = 1;
+								}
+								if ($this->data['name'] == 'administrator') {
+									$checkboxOptions['disabled'] = 1;
+									$checkboxOptions['checked' ] = 1;
+								}
+							?>
+							<span><?php echo $this->formCheckbox($checkboxName, '1', $checkboxOptions) . $action['name']; ?></span>
+							<br />
+
+						<?php endforeach; ?>
+					</div>
+					
+					<?php $count++; // we want to break line every 3th controller ?>
+					<?php if($count % 4 == 0) echo '<br class="clear" />'; ?>
+				
+				<?php endforeach; ?>
+				<br class="clear" />
+			</div>
+		</div>
+		<?php endforeach; ?>
+		
+		<?php $action_button = ($this->action == 'add') ? 'Create' : 'Update'; ?>
+		<input type="submit" name="submit" value="<?php echo $action_button; ?>" class="button" />
+		<span class="btn_separator">-or-</span>
+		<a href="/admin/acl-roles">Cancel</a>
+	</div>
+</form>
+

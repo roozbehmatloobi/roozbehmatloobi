@@ -1,0 +1,46 @@
+<?php
+/**
+ * Admin - View Role.
+
+ * @package Admin
+ * @subpackage AclRoles
+ *
+ */
+
+echo $this->render('header.phtml');
+?>
+
+      <!-- C.1 CONTENT -->
+      <div class="content">
+        <!-- CONTENT CELL -->
+        <div class="content-cell-corner-top"></div>
+        <div class="content-cell">
+          <h1>View Role</h1>
+			<?php echo $this->render('acl-roles/_form.phtml'); ?>
+        </div>
+        <div class="content-cell-corner-bottom"></div>
+      </div>
+      <!-- C.2 SUBCONTENT -->
+      <div class="subcontent">
+        <!-- SUBCONTENT CELL -->
+        <div class="subcontent-cell-corner-top"></div>
+        <div class="subcontent-cell">
+          <h1 class="menu">Roles</h1>
+          <div class="sidemenu">
+          <ul>
+            <li><a href="<?php echo $this->base_url;?>/admin/acl-roles">List Roles</a></li>
+          </ul>
+          </div>
+        </div>
+        <div class="subcontent-cell-corner-bottom"></div>
+        <!-- SUBCONTENT CELL -->
+        <div class="subcontent-cell-corner-top"></div>
+        <div class="subcontent-cell">
+          <h1>Help</h1>
+          <h5>Edit Role</h5>
+          <p>Edit role details.</p>
+        </div>
+        <div class="subcontent-cell-corner-bottom"></div>
+      </div>
+
+<?php echo $this->render('footer.phtml'); ?>
